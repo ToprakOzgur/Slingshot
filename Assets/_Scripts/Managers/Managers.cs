@@ -15,7 +15,7 @@ public class Managers : MonoBehaviour
 
   void Awake()
   {
-    Game = GetComponent<GameManager>();
+            Game = GetComponent<GameManager>();
     UI = GetComponent<UIManager>();
     Score = GetComponent<ScoreManager>();
     Spawner = GetComponent<SpawnManager>();

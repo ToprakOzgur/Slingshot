@@ -37,4 +37,6 @@ public class GameManager : MonoBehaviour
       currentState.OnUpdate();
     }
   }
+
+  
 }
