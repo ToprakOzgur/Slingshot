@@ -13,6 +13,8 @@ public class GameOverState : BaseState
     PlayerPrefs.Save();
     // StartCoroutine(ExtraScoreTimeAfterDied());
     // StartCoroutine(FadeCameraColor());
+
+
   }
 
   public override void OnDeactivate()
