@@ -18,15 +18,31 @@ public class Sling : MonoBehaviour
   #endregion
 
   #region properties
-  private float maxBindAngle = 30;
-  private int bindSensibility = 30;
-  private float bounceOutAnimDuration = 0.6f;
+  [SerializeField] private List<ThrowObject> throwObjects;
+
+  [Header("GamePlay Settings")]
+  [SerializeField] [Range(0, 45)] private int maxBindAngle;
+  [SerializeField] private int bindSensibility;
+  [SerializeField] private float bounceOutAnimDuration;
 
   #endregion
 
+  #region Unity functions
+  private void Awake()
+  {
+
+  }
+  #endregion
 
 
   #region functions
+
+  public void Launch()
+  {
+    throwObjects[0].gameObject.transform.parent = null;
+    throwObjects[0].gameObject.GetComponent<Rigidbody>().isKinematic = false;
+    throwObjects[0].gameObject.GetComponent<Rigidbody>().velocity = throwObjects[0].gameObject.transform.forward * 20;
+  }
 
   //Rotation of Sling when targeting
   public void Bend(float endDragPos, float startDragPos)
@@ -60,7 +76,6 @@ public class Sling : MonoBehaviour
       yield return null;
     }
   }
-
 
   #endregion
 }

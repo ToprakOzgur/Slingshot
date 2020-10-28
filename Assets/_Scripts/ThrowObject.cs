@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowBase : MonoBehaviour
+public class ThrowObject : MonoBehaviour
 {
   protected Vector3 mOffset;
   protected float mZCoord;
@@ -30,8 +30,9 @@ public class ThrowBase : MonoBehaviour
 
   protected void OnMouseUp()
   {
-    touchStartPoint = Vector3.zero;
+    sling.Launch();
     sling.VibrationAnimToOriginalPosAfterLaunch();
+    touchStartPoint = Vector3.zero;
   }
   protected Vector3 GetMouseWorldPos()
   {
@@ -51,7 +52,6 @@ public class ThrowBase : MonoBehaviour
 
     //for sling angle
     sling.Bend(worldPos.y, touchStartPoint.y);
-
     transform.position = new Vector3(newPos.x, transform.position.y, transform.position.z);
 
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball : ThrowBase
+public class Ball : ThrowObject
 {
 
 }
