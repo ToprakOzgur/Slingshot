@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ease
 {
-  //from:  https://github.com/acron0/Easings
+  //quote from:  https://github.com/acron0/Easings
 
   public static float BounceEaseOut(float p)
   {

@@ -121,6 +121,38 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &176556504 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2704223069017685219, guid: e797a512aa195471d804f4013942a337,
+    type: 3}
+  m_PrefabInstance: {fileID: 2974132071316699701}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &176556506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176556504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94c7ac4d7c119444eb8c9e6056cc7295, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animDuration: 0.2
+  meshCollider: {fileID: 1765293345}
+--- !u!114 &223343741 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 223343741, guid: e797a512aa195471d804f4013942a337,
+    type: 3}
+  m_PrefabInstance: {fileID: 2974132071316699701}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 195e7f876d57b4cebaf76bf68d8130d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +519,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 590561e4ebbbe452d9dc6e536b1b68e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!64 &1765293345 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 1765293345, guid: e797a512aa195471d804f4013942a337,
+    type: 3}
+  m_PrefabInstance: {fileID: 2974132071316699701}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2974132071316699701
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -495,35 +533,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1546081407, guid: e797a512aa195471d804f4013942a337, type: 3}
-      propertyPath: maxBindAngle
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1546081407, guid: e797a512aa195471d804f4013942a337, type: 3}
-      propertyPath: bindSensibility
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1546081407, guid: e797a512aa195471d804f4013942a337, type: 3}
-      propertyPath: maxBindAngleVertical
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1546081407, guid: e797a512aa195471d804f4013942a337, type: 3}
-      propertyPath: maxBindAngleHorizontal
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 2923754238751287595, guid: e797a512aa195471d804f4013942a337,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 2974132071331168820, guid: e797a512aa195471d804f4013942a337,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.287
-      objectReference: {fileID: 0}
-    - target: {fileID: 2974132071331168820, guid: e797a512aa195471d804f4013942a337,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.2870765
+      propertyPath: objectContainer
+      value: 
+      objectReference: {fileID: 223343741}
+    - target: {fileID: 1765293345, guid: e797a512aa195471d804f4013942a337, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2974132071411332346, guid: e797a512aa195471d804f4013942a337,
         type: 3}
@@ -584,6 +599,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sling
+      objectReference: {fileID: 0}
+    - target: {fileID: 3372215498875299417, guid: e797a512aa195471d804f4013942a337,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e797a512aa195471d804f4013942a337, type: 3}

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-
 [RequireComponent(typeof(GameManager))]
 [RequireComponent(typeof(UIManager))]
 [RequireComponent(typeof(ScoreManager))]
@@ -15,7 +14,7 @@ public class Managers : MonoBehaviour
 
   void Awake()
   {
-            Game = GetComponent<GameManager>();
+    Game = GetComponent<GameManager>();
     UI = GetComponent<UIManager>();
     Score = GetComponent<ScoreManager>();
     Spawner = GetComponent<SpawnManager>();

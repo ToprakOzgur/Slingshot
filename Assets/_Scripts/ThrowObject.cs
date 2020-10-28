@@ -1,23 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ThrowObject : MonoBehaviour
 {
-
+  public static event Action OnLaunched = delegate { };
+  public static event Action<Vector3, Vector3> OnDrag = delegate { };
   protected float mZCoord;
-  protected Sling sling;
   protected Vector3 touchStartPoint;
 
-
-  #region Unity functions
-
-  protected void Awake()
-  {
-    sling = transform.parent.parent.gameObject.GetComponent<Sling>();
-  }
-
-  #endregion
 
   #region Drag functions
   protected void OnMouseDown()
@@ -27,11 +19,9 @@ public class ThrowObject : MonoBehaviour
     touchStartPoint = GetMouseWorldPos();
 
   }
-
   protected void OnMouseUp()
   {
-    sling.Launch();
-    sling.VibrationAnimToOriginalPosAfterLaunch();
+    OnLaunched();
     touchStartPoint = Vector3.zero;
   }
   protected Vector3 GetMouseWorldPos()
@@ -44,8 +34,7 @@ public class ThrowObject : MonoBehaviour
   protected void OnMouseDrag()
   {
     var worldPos = GetMouseWorldPos();
-
-    sling.Bend(worldPos, touchStartPoint);
+    OnDrag(worldPos, touchStartPoint);
   }
 
   #endregion

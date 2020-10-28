@@ -4,66 +4,69 @@ using UnityEngine;
 
 public class Sling : MonoBehaviour
 {
-  #region Edges
-
-  [System.Serializable]
-  public struct Edges
-  {
-    public Transform left;
-    public Transform right;
-
-  }
-  public Edges edgeTransforms;
-
-  #endregion
 
   #region properties
-  [SerializeField] private List<ThrowObject> throwObjects;
 
   [Header("GamePlay Settings")]
-  [SerializeField] [Range(0, 30)] private int maxBindAngleVertical;
-  [SerializeField] [Range(0, 60)] private int maxBindAngleHorizontal;
-  [SerializeField] private int bindSensibility;
+  [SerializeField] [Range(0, 30)] private int maxRotateVertical;
+  [SerializeField] [Range(0, 60)] private int maxRotateHorizontal;
+  [SerializeField] private int rotationSensibility;
   [SerializeField] private float bounceOutAnimDuration;
 
+
+  [Header("Reference to Gameobjects")]
+  [SerializeField] private ThrowObjectContainer objectContainer;
   #endregion
 
   #region Unity functions
-  private void Awake()
+
+  //register to throwable object events
+  private void OnEnable()
   {
-
+    ThrowObject.OnLaunched += Launch;
+    ThrowObject.OnDrag += Rotate;
   }
-  #endregion
 
+  //unregister from throwable object events
+  private void OnDisable()
+  {
+    ThrowObject.OnLaunched -= Launch;
+    ThrowObject.OnDrag -= Rotate;
+  }
+
+  #endregion
 
   #region functions
 
-  public void Launch()
+  private void Launch()
   {
-    throwObjects[0].gameObject.transform.parent = null;
-    throwObjects[0].gameObject.GetComponent<Rigidbody>().isKinematic = false;
-    throwObjects[0].gameObject.GetComponent<Rigidbody>().velocity = transform.forward * 20;
+    var throwItem = objectContainer.GetTopObject();
+    throwItem.gameObject.transform.parent = null;
+    throwItem.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+    throwItem.gameObject.GetComponent<Rigidbody>().velocity = transform.forward * 20;
+    VibrationAnimToOriginalPosAfterLaunch();
+    objectContainer.PrepareTopObject();
   }
 
-  //Rotation of Sling when targeting
-  public void Bend(Vector3 endDragPos, Vector3 startDragPos)
+  //Rotation of Sling while targeting
+  private void Rotate(Vector3 endDragPos, Vector3 startDragPos)
   {
-    var dragVertical = startDragPos.y - endDragPos.y;
-    var dragHorizontal = startDragPos.x - endDragPos.x;
 
-    if (dragVertical < 0) return;
+    var dragAmount = startDragPos - endDragPos;
 
-    var bindVertical = dragVertical * bindSensibility;
-    var bindHorizontal = dragHorizontal * bindSensibility;
+    if (dragAmount.y < 0) return;
 
-    //clamping max value to maxBindAngle
-    var angleVerticalClamped = bindVertical > maxBindAngleVertical ? maxBindAngleVertical : bindVertical;
-    var angleHorizontalClamped = Mathf.Clamp(bindHorizontal, -maxBindAngleHorizontal, maxBindAngleHorizontal);
+    var rotateAngle = dragAmount * rotationSensibility;
 
-    transform.eulerAngles = new Vector3(-angleVerticalClamped, angleHorizontalClamped, transform.eulerAngles.z);
+    //Clamping angles
+    var verticalRotationClamped = rotateAngle.y > maxRotateVertical ? maxRotateVertical : rotateAngle.y;
+    var horizontalRotationClamped = Mathf.Clamp(rotateAngle.x, -maxRotateHorizontal, maxRotateHorizontal);
+
+    //Rotation  
+    transform.eulerAngles = new Vector3(-verticalRotationClamped, horizontalRotationClamped, transform.eulerAngles.z);
   }
 
-  public void VibrationAnimToOriginalPosAfterLaunch()
+  private void VibrationAnimToOriginalPosAfterLaunch()
   {
     StartCoroutine(Move());
   }
