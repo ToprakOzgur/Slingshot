@@ -9,26 +9,15 @@ public class SlingHead : MonoBehaviour
   #region Unity functions
 
   //register to throwable object events
-  private void OnEnable()
-  {
-    ThrowObject.OnLaunched += MoveDown;
-
-  }
+  private void OnEnable() => ThrowObject.OnLaunched += MoveDown;
 
   //unregister from throwable object events
-  private void OnDisable()
-  {
-    ThrowObject.OnLaunched -= MoveDown;
+  private void OnDisable() => ThrowObject.OnLaunched -= MoveDown;
 
-  }
 
   #endregion
 
-  private void MoveDown()
-  {
-
-    StartCoroutine(MoveDownUpAnim());
-  }
+  private void MoveDown() => StartCoroutine(MoveDownUpAnim());
 
   IEnumerator MoveDownUpAnim()
   {

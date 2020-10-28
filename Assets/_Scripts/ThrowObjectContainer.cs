@@ -14,7 +14,6 @@ public class ThrowObjectContainer : MonoBehaviour
     {
       objectPositions.Add(objectList[i].transform.localPosition);
     }
-
   }
 
   public ThrowObject GetTopObject()
@@ -25,11 +24,7 @@ public class ThrowObjectContainer : MonoBehaviour
   }
 
 
-  public void PrepareTopObject()
-  {
-    StartCoroutine(MoveUp());
-
-  }
+  public void PrepareTopObject() => StartCoroutine(MoveUp());
 
   IEnumerator MoveUp()
   {
