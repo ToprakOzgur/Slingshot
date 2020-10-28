@@ -508,7 +508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1546081407, guid: e797a512aa195471d804f4013942a337, type: 3}
       propertyPath: maxBindAngleHorizontal
-      value: 50
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 2923754238751287595, guid: e797a512aa195471d804f4013942a337,
         type: 3}

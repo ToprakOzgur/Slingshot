@@ -42,7 +42,7 @@ public class Sling : MonoBehaviour
   {
     throwObjects[0].gameObject.transform.parent = null;
     throwObjects[0].gameObject.GetComponent<Rigidbody>().isKinematic = false;
-    throwObjects[0].gameObject.GetComponent<Rigidbody>().velocity = throwObjects[0].gameObject.transform.forward * 20;
+    throwObjects[0].gameObject.GetComponent<Rigidbody>().velocity = transform.forward * 20;
   }
 
   //Rotation of Sling when targeting
