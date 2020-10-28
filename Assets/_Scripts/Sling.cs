@@ -21,7 +21,8 @@ public class Sling : MonoBehaviour
   [SerializeField] private List<ThrowObject> throwObjects;
 
   [Header("GamePlay Settings")]
-  [SerializeField] [Range(0, 45)] private int maxBindAngle;
+  [SerializeField] [Range(0, 30)] private int maxBindAngleVertical;
+  [SerializeField] [Range(0, 60)] private int maxBindAngleHorizontal;
   [SerializeField] private int bindSensibility;
   [SerializeField] private float bounceOutAnimDuration;
 
@@ -45,18 +46,21 @@ public class Sling : MonoBehaviour
   }
 
   //Rotation of Sling when targeting
-  public void Bend(float endDragPos, float startDragPos)
+  public void Bend(Vector3 endDragPos, Vector3 startDragPos)
   {
-    var dragMagnitude = startDragPos - endDragPos;
+    var dragVertical = startDragPos.y - endDragPos.y;
+    var dragHorizontal = startDragPos.x - endDragPos.x;
 
-    if (dragMagnitude < 0) return;
+    if (dragVertical < 0) return;
 
-    var bindMagnitude = dragMagnitude * bindSensibility;
+    var bindVertical = dragVertical * bindSensibility;
+    var bindHorizontal = dragHorizontal * bindSensibility;
 
     //clamping max value to maxBindAngle
-    var angleClamped = bindMagnitude > maxBindAngle ? maxBindAngle : bindMagnitude;
+    var angleVerticalClamped = bindVertical > maxBindAngleVertical ? maxBindAngleVertical : bindVertical;
+    var angleHorizontalClamped = Mathf.Clamp(bindHorizontal, -maxBindAngleHorizontal, maxBindAngleHorizontal);
 
-    transform.eulerAngles = new Vector3(-angleClamped, transform.eulerAngles.y, transform.eulerAngles.z);
+    transform.eulerAngles = new Vector3(-angleVerticalClamped, angleHorizontalClamped, transform.eulerAngles.z);
   }
 
   public void VibrationAnimToOriginalPosAfterLaunch()

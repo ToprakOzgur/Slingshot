@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ThrowObject : MonoBehaviour
 {
-  protected Vector3 mOffset;
+
   protected float mZCoord;
   protected Sling sling;
   protected Vector3 touchStartPoint;
@@ -14,7 +14,7 @@ public class ThrowObject : MonoBehaviour
 
   protected void Awake()
   {
-    sling = transform.parent.gameObject.GetComponent<Sling>();
+    sling = transform.parent.parent.gameObject.GetComponent<Sling>();
   }
 
   #endregion
@@ -25,7 +25,7 @@ public class ThrowObject : MonoBehaviour
     mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
 
     touchStartPoint = GetMouseWorldPos();
-    mOffset = gameObject.transform.position - touchStartPoint;
+
   }
 
   protected void OnMouseUp()
@@ -43,22 +43,10 @@ public class ThrowObject : MonoBehaviour
   }
   protected void OnMouseDrag()
   {
-
     var worldPos = GetMouseWorldPos();
 
-    //for ball movement left-right
-    var newPos = worldPos + mOffset;
-    newPos.x = Mathf.Clamp(newPos.x, sling.edgeTransforms.left.position.x, sling.edgeTransforms.right.position.x);
-
-    //for sling angle
-    sling.Bend(worldPos.y, touchStartPoint.y);
-    transform.position = new Vector3(newPos.x, transform.position.y, transform.position.z);
-
-
-
+    sling.Bend(worldPos, touchStartPoint);
   }
-
-
 
   #endregion
 }
