@@ -11,4 +11,9 @@ public class ScoreManager : MonoBehaviour
     currentScore += amount;
     Debug.Log("Score: " + currentScore);
   }
+  public void ResetScore()
+  {
+    currentScore = 0;
+
+  }
 }

@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class GameLostState : BaseState
 {
-  public static event Action OnPlayerDied = delegate { };
+
   public override void OnActivate()
   {
     Debug.Log("lost");
-    OnPlayerDied();
+    Managers.UI.EnableMenuPanel();
+    Managers.UI.DisableStartButton();
+    Managers.UI.EnableRestartButton();
   }
 
   public override void OnDeactivate()

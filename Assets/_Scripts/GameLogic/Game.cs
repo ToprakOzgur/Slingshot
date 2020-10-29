@@ -4,17 +4,22 @@ using UnityEngine;
 public class Game
 {
   private readonly int shotCount = 5;
-  private readonly int successCount = 3;
+  private readonly int successCountTarget = 3;
 
   private int currentShot;
+  private int successfulShotCount;
+  private int failShotCount;
   private Shot[] shoots;
   public Game()
   {
     shoots = new Shot[shotCount];
     currentShot = 0;
+    successfulShotCount = 0;
+    failShotCount = 0;
   }
   public void ShotIsSuccessful()
   {
+    successfulShotCount++;
     Debug.Log("success");
     shoots[currentShot].isSuccess = true;
 
@@ -36,6 +41,7 @@ public class Game
     Debug.Log("fail");
     shoots[currentShot].isSuccess = false;
     currentShot++;
+    failShotCount++;
 
     if (didLost())
     {
@@ -43,10 +49,17 @@ public class Game
       return;
     }
 
+    //reset next shot bonus score
     shoots[currentShot].score = 0;
   }
 
-  public bool didWin() => shoots.Where(x => x.isSuccess == true).ToList().Count >= successCount;
-  public bool didLost() => currentShot >= shotCount;
+  public bool didWin()
+  {
+    return successfulShotCount >= successCountTarget;
+  }
+  public bool didLost()
+  {
+    return failShotCount > shotCount - successCountTarget;
+  }
 
 }

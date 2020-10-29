@@ -11,7 +11,5 @@
   {
     Managers.UI.DisableMenuPanel();
     Managers.UI.DisableStartButton();
-
   }
-
 }
