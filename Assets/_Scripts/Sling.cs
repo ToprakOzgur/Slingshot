@@ -120,18 +120,21 @@ public class Sling : MonoBehaviour
       lineVisual.SetPosition(i, pos);
     }
   }
-  private Vector3 CalculatePositionInTime(Vector3 vo, float time)
+  private Vector3 CalculatePositionInTime(Vector3 initialVelocity, float time)
   {
-    Vector3 Vxz = vo;
+    Vector3 Vxz = initialVelocity;
     Vxz.y = 0f;
 
-    Vector3 result = throwItem.gameObject.transform.position + vo * time;
-    //y pos
-    float sY = (-0.5f * Mathf.Abs(Physics.gravity.y) * (time * time)) + (vo.y * time) + throwItem.gameObject.transform.position.y;
+    //  yatay mesafe= (baslangic hizi X zaman + ilk mesafe)  
+    Vector3 distance = throwItem.gameObject.transform.position + initialVelocity * time;
 
-    result.y = sY;
+    //dikey mesafe = (-1/2 * ivme * zamanin karesi) + (ilk hiz * zaman)+ ilk yukseklik   
 
-    return result;
+    float verticalDistance = (-0.5f * Mathf.Abs(Physics.gravity.y) * (time * time)) + (initialVelocity.y * time) + throwItem.gameObject.transform.position.y;
+
+    distance.y = verticalDistance;
+
+    return distance;
 
   }
   #endregion

@@ -371,45 +371,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6944793131014855225}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &862780789
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 862780790}
-  - component: {fileID: 862780793}
-  m_Layer: 0
-  m_Name: TargetingPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &862780790
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 862780789}
-  m_LocalRotation: {x: -0.08715578, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 2.67, z: -0.38}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_Children: []
-  m_Father: {fileID: 1290021601}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -10, y: 0, z: 0}
---- !u!33 &862780793
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 862780789}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,12 +845,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!4 &1290021601 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2974132071411332346, guid: e797a512aa195471d804f4013942a337,
-    type: 3}
-  m_PrefabInstance: {fileID: 2974132071316699701}
-  m_PrefabAsset: {fileID: 0}
 --- !u!64 &1765293345 stripped
 MeshCollider:
   m_CorrespondingSourceObject: {fileID: 1765293345, guid: e797a512aa195471d804f4013942a337,
@@ -918,7 +873,7 @@ PrefabInstance:
     - target: {fileID: 1546081407, guid: e797a512aa195471d804f4013942a337, type: 3}
       propertyPath: targetingPoint
       value: 
-      objectReference: {fileID: 862780790}
+      objectReference: {fileID: 0}
     - target: {fileID: 1546081407, guid: e797a512aa195471d804f4013942a337, type: 3}
       propertyPath: throwConstant
       value: 6
