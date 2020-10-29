@@ -8,11 +8,16 @@ public class GameWonState : BaseState
     Managers.UI.EnableMenuPanel();
     Managers.UI.DisableStartButton();
     Managers.UI.EnableRestartButton();
+    Managers.UI.EnableScoreText();
+    Managers.UI.EnableWinText();
   }
 
   public override void OnDeactivate()
   {
-
+    Managers.UI.DisableMenuPanel();
+    Managers.UI.DisableStartButton();
+    Managers.UI.DisableScoreText();
+    Managers.UI.DisableWinText();
   }
 
 }

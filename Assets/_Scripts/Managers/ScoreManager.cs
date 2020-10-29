@@ -9,11 +9,13 @@ public class ScoreManager : MonoBehaviour
   public void AddScore(int amount)
   {
     currentScore += amount;
+    Managers.UI.SetScore(currentScore);
     Debug.Log("Score: " + currentScore);
   }
   public void ResetScore()
   {
     currentScore = 0;
+    Managers.UI.SetScore(0);
 
   }
 }

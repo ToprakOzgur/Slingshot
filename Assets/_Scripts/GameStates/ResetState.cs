@@ -9,11 +9,9 @@ public class ResetState : BaseState
   {
     //Reset all game Setting,UI / Gameobjects to original positions..
     Debug.Log("reseting");
-    Managers.UI.DisableMenuPanel();
-    Managers.UI.DisableStartButton();
-    Managers.UI.DisableMenuPanel();
-
+    Managers.UI.ResetUI();
     Managers.Score.ResetScore();
+
     OnReset();
     //setState to GamePlayState
     Managers.Game.SetState(typeof(GamePlayState));
