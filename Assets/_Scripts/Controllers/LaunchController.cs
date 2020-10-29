@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaunchController : MonoBehaviour
+public class LaunchController
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  private int throwPower;
+  public LaunchController(int throwPower)
+  {
+    this.throwPower = throwPower;
+  }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  public void Launch(ThrowObject throwItem)
+  {
+    throwItem.gameObject.transform.parent = null;
+    throwItem.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+    throwItem.gameObject.GetComponent<Rigidbody>().velocity = throwItem.gameObject.transform.transform.forward * throwPower;
+  }
 }

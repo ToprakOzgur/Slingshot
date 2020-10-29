@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Sling : MonoBehaviour
 {
-
-  #region properties
+  #region Properties
 
   [Header("GamePlay Settings")]
   [SerializeField] [Range(0, 30)] private int maxRotateVertical;
@@ -25,9 +24,26 @@ public class Sling : MonoBehaviour
   private ThrowObject throwItem;
   [SerializeField] private int throwPower = 20;
 
+
+  //Sling Behaviour Controllers
+  private LaunchController launchController;
+  private RotateController rotateController;
+  private PathController pathController;
   #endregion
 
-  #region Unity functions
+  #region Unity events
+
+  private void Awake()
+  {
+    launchController = new LaunchController(throwPower);
+    rotateController = new RotateController(rotationSensibility, maxRotateVertical, maxRotateHorizontal);
+    pathController = new PathController(lineSegment, lineVisual);
+  }
+  private void Start()
+  {
+    lineVisual.positionCount = lineSegment;
+    throwItem = objectContainer.GetTopObject();
+  }
 
   //register to throwable object events
   private void OnEnable()
@@ -42,27 +58,18 @@ public class Sling : MonoBehaviour
     ThrowObject.OnLaunched -= Launch;
     ThrowObject.OnDrag -= RotateAndShowPath;
   }
-  private void Start()
-  {
-    lineVisual.positionCount = lineSegment;
-    throwItem = objectContainer.GetTopObject();
-  }
-  #endregion
 
-  #region functions
+  #endregion
 
   private void Launch()
   {
-    throwItem.gameObject.transform.parent = null;
-    throwItem.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-    throwItem.gameObject.GetComponent<Rigidbody>().velocity = throwItem.gameObject.transform.transform.forward * throwPower;
+    launchController.Launch(throwItem);
     VibrationAnimToOriginalPosAfterLaunch();
     objectContainer.PrepareTopObject();
     throwItem = null;
     lineVisual.enabled = false;
   }
 
-  //Rotation of Sling while targeting
   private void RotateAndShowPath(Vector3 endDragPos, Vector3 startDragPos)
   {
 
@@ -72,27 +79,18 @@ public class Sling : MonoBehaviour
 
   private void Rotate(Vector3 endDragPos, Vector3 startDragPos)
   {
-
-    var dragAmount = startDragPos - endDragPos;
-
-    if (dragAmount.y < 0) return;
-
-    var rotateAngle = dragAmount * rotationSensibility;
-
-    //Clamping angles
-    var verticalRotationClamped = rotateAngle.y > maxRotateVertical ? maxRotateVertical : rotateAngle.y;
-    var horizontalRotationClamped = Mathf.Clamp(rotateAngle.x, -maxRotateHorizontal, maxRotateHorizontal);
-
-    //Rotation  
-    transform.eulerAngles = new Vector3(-verticalRotationClamped, horizontalRotationClamped, transform.eulerAngles.z);
+    rotateController.Rotate(endDragPos, startDragPos, this.transform);
   }
 
   private void DrawPath(Vector3 endDragPos, Vector3 startDragPos)
   {
     if (throwItem == null)
       throwItem = objectContainer.GetTopObject();
+
     lineVisual.enabled = true;
-    VisualizePath(throwItem.transform.forward * throwPower);
+
+    var initialVelocity = throwItem.transform.forward * throwPower;
+    pathController.VisualizePath(initialVelocity, throwItem.transform.position);
   }
   private void VibrationAnimToOriginalPosAfterLaunch()
   {
@@ -112,32 +110,7 @@ public class Sling : MonoBehaviour
     }
   }
 
-  private void VisualizePath(Vector3 vo)
-  {
-    for (int i = 0; i < lineSegment; i++)
-    {
-      Vector3 pos = CalculatePositionInTime(vo, i / (float)lineSegment);
-      lineVisual.SetPosition(i, pos);
-    }
-  }
-  private Vector3 CalculatePositionInTime(Vector3 initialVelocity, float time)
-  {
-    Vector3 Vxz = initialVelocity;
-    Vxz.y = 0f;
 
-    //  yatay mesafe= (baslangic hizi X zaman + ilk mesafe)  
-    Vector3 distance = throwItem.gameObject.transform.position + initialVelocity * time;
-
-    //dikey mesafe = (-1/2 * ivme * zamanin karesi) + (ilk hiz * zaman)+ ilk yukseklik   
-
-    float verticalDistance = (-0.5f * Mathf.Abs(Physics.gravity.y) * (time * time)) + (initialVelocity.y * time) + throwItem.gameObject.transform.position.y;
-
-    distance.y = verticalDistance;
-
-    return distance;
-
-  }
-  #endregion
 }
 
 
