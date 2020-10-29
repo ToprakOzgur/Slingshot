@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuState : BaseState
+public class GameWonState : BaseState
 {
   public override void OnActivate()
   {
@@ -14,8 +14,4 @@ public class MenuState : BaseState
 
   }
 
-  public override void OnUpdate()
-  {
-
-  }
 }

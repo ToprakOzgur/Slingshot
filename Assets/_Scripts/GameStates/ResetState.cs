@@ -4,19 +4,15 @@ using UnityEngine;
 using System;
 public class ResetState : BaseState
 {
-  public static event Action OnGamePlayActivated = delegate { };
+
   public override void OnActivate()
   {
-    OnGamePlayActivated();
+    //Reset all game Setting/ Gameobjects to original positions..
+    //setState to GamePlayState
   }
 
   public override void OnDeactivate()
   {
-    throw new System.NotImplementedException();
-  }
 
-  public override void OnUpdate()
-  {
-    throw new System.NotImplementedException();
   }
 }

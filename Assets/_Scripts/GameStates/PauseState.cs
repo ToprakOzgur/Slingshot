@@ -14,8 +14,4 @@ public class PauseState : BaseState
     throw new System.NotImplementedException();
   }
 
-  public override void OnUpdate()
-  {
-    throw new System.NotImplementedException();
-  }
 }

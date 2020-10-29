@@ -28,15 +28,7 @@ public class GameManager : MonoBehaviour
 
   private void Start()
   {
-    SetState(typeof(MenuState));
-  }
-  void Update()
-  {
-    if (currentState != null)
-    {
-      currentState.OnUpdate();
-    }
+    SetState(typeof(StartState));
   }
 
-  
 }
