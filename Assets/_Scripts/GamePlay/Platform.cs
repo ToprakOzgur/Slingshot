@@ -24,6 +24,6 @@ public class Platform : MonoBehaviour
 
   private void DisableCollider() => boxCollider.enabled = false;
 
-  private void EnableCollider() => boxCollider.enabled = true;
+  private void EnableCollider(bool isDragBelowThreshold) => boxCollider.enabled = true;
 
 }

@@ -5,15 +5,18 @@ using UnityEngine;
 
 public class ThrowObject : MonoBehaviour
 {
-  public static event Action OnLaunched = delegate { };
+  public static event Action<bool> OnLaunched = delegate { };
   public static event Action<Vector3, Vector3> OnDrag = delegate { };
   protected float mZCoord;
   protected Vector3 touchStartPoint;
 
-
+  public static bool isGamePlayActivated = false;
   #region Drag functions
   protected void OnMouseDown()
   {
+    if (!isGamePlayActivated)
+      return;
+
     mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
 
     touchStartPoint = GetMouseWorldPos();
@@ -21,8 +24,19 @@ public class ThrowObject : MonoBehaviour
   }
   protected void OnMouseUp()
   {
-    OnLaunched();
+
+    if (!isGamePlayActivated)
+      return;
+
+    var dragDistance = GetMouseWorldPos() - touchStartPoint;
+
+    //if drag is small or upwards
+    var isDragBelowThreshold = dragDistance.sqrMagnitude < 0.01f || dragDistance.y > 0;
+
     touchStartPoint = Vector3.zero;
+    OnLaunched(isDragBelowThreshold);
+
+
   }
   protected Vector3 GetMouseWorldPos()
   {
@@ -33,8 +47,12 @@ public class ThrowObject : MonoBehaviour
   }
   protected void OnMouseDrag()
   {
+    if (!isGamePlayActivated)
+      return;
+
     var worldPos = GetMouseWorldPos();
     OnDrag(worldPos, touchStartPoint);
+
   }
 
   #endregion

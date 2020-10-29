@@ -1,17 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GamePlayState : BaseState
 {
+  private Game currentGame;
+
   public override void OnActivate()
   {
-    throw new System.NotImplementedException();
-  }
+    ThrowObject.isGamePlayActivated = true;
 
+    currentGame = new Game();
+  }
   public override void OnDeactivate()
   {
-    throw new System.NotImplementedException();
+    ThrowObject.isGamePlayActivated = false;
+  }
+  private void OnEnable()
+  {
+    WinTrigger.OnSuccess += ShotSuccess;
+    LostTrigger.OnFail += ShotFail;
+  }
+  private void OnDisable()
+  {
+    WinTrigger.OnSuccess -= ShotSuccess;
+    LostTrigger.OnFail -= ShotFail;
+  }
+  private void ShotSuccess()
+  {
+    currentGame.ShotIsSuccessful();
+  }
+  private void ShotFail()
+  {
+    currentGame.ShotIsFail();
   }
 
 }

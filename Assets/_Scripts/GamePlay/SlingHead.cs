@@ -6,7 +6,6 @@ public class SlingHead : MonoBehaviour
 {
   [SerializeField] private float animDuration;
   [SerializeField] private MeshCollider meshCollider;
-  #region Unity functions
 
   //register to throwable object events
   private void OnEnable() => ThrowObject.OnLaunched += MoveDown;
@@ -14,10 +13,11 @@ public class SlingHead : MonoBehaviour
   //unregister from throwable object events
   private void OnDisable() => ThrowObject.OnLaunched -= MoveDown;
 
-
-  #endregion
-
-  private void MoveDown() => StartCoroutine(MoveDownUpAnim());
+  private void MoveDown(bool isDragBelowThreshold)
+  {
+    if (isDragBelowThreshold) return;
+    StartCoroutine(MoveDownUpAnim());
+  }
 
   IEnumerator MoveDownUpAnim()
   {

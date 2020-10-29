@@ -61,13 +61,17 @@ public class Sling : MonoBehaviour
 
   #endregion
 
-  private void Launch()
+  private void Launch(bool isDragBelowThreshold)
   {
-    launchController.Launch(throwItem);
+    lineVisual.enabled = false;
     VibrationAnimToOriginalPosAfterLaunch();
+
+    if (isDragBelowThreshold) return;
+
+    launchController.Launch(throwItem);
     objectContainer.PrepareTopObject();
     throwItem = null;
-    lineVisual.enabled = false;
+
   }
 
   private void RotateAndShowPath(Vector3 endDragPos, Vector3 startDragPos)
@@ -77,10 +81,8 @@ public class Sling : MonoBehaviour
     DrawPath(endDragPos, startDragPos);
   }
 
-  private void Rotate(Vector3 endDragPos, Vector3 startDragPos)
-  {
-    rotateController.Rotate(endDragPos, startDragPos, this.transform);
-  }
+  private void Rotate(Vector3 endDragPos, Vector3 startDragPos) => rotateController.Rotate(endDragPos, startDragPos, this.transform);
+
 
   private void DrawPath(Vector3 endDragPos, Vector3 startDragPos)
   {
@@ -92,10 +94,8 @@ public class Sling : MonoBehaviour
     var initialVelocity = throwItem.transform.forward * throwPower;
     pathController.VisualizePath(initialVelocity, throwItem.transform.position);
   }
-  private void VibrationAnimToOriginalPosAfterLaunch()
-  {
-    StartCoroutine(Move());
-  }
+  private void VibrationAnimToOriginalPosAfterLaunch() => StartCoroutine(Move());
+
   IEnumerator Move()
   {
     Vector3 startPosition = transform.position;

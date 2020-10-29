@@ -9,26 +9,15 @@ public class GameManager : MonoBehaviour
   {
     get { return currentState; }
   }
+  private void Start() => SetState(typeof(StartState));
 
   //Changes the current game state
   public void SetState(System.Type newStateType)
   {
-    if (currentState != null)
-    {
-      currentState.OnDeactivate();
-    }
+    currentState?.OnDeactivate();
 
     currentState = GetComponentInChildren(newStateType) as BaseState;
 
-    if (currentState != null)
-    {
-      currentState.OnActivate();
-    }
+    currentState?.OnActivate();
   }
-
-  private void Start()
-  {
-    SetState(typeof(StartState));
-  }
-
 }

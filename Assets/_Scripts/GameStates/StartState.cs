@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class StartState : BaseState
+﻿public class StartState : BaseState
 {
   public override void OnActivate()
   {

@@ -5,11 +5,7 @@ using UnityEngine;
 public class LaunchController
 {
   private int throwPower;
-  public LaunchController(int throwPower)
-  {
-    this.throwPower = throwPower;
-  }
-
+  public LaunchController(int throwPower) => this.throwPower = throwPower;
   public void Launch(ThrowObject throwItem)
   {
     throwItem.gameObject.transform.parent = null;
