@@ -6,18 +6,18 @@ public class Sling : MonoBehaviour
 {
   #region Properties
 
-  [Header("GamePlay Settings")]
+  [Header("GAMEPLAY SETTINGS")]
   [SerializeField] [Range(0, 30)] private int maxRotateVertical;
   [SerializeField] [Range(0, 60)] private int maxRotateHorizontal;
   [SerializeField] private int rotationSensibility;
   [SerializeField] private float bounceOutAnimDuration;
 
 
-  [Header("Reference to Gameobjects")]
+  [Header("REFERENCES")]
   [SerializeField] private ThrowObjectContainer objectContainer;
 
 
-  [Header("Line Path")]
+  [Header("LINE PATH")]
   [SerializeField] private LineRenderer lineVisual;
   [SerializeField] private int lineSegment = 10;
   [SerializeField] private Transform targetingPoint;
