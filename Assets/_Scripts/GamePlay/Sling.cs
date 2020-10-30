@@ -50,6 +50,7 @@ public class Sling : MonoBehaviour
   {
     ThrowObject.OnLaunched += Launch;
     ThrowObject.OnDrag += RotateAndShowPath;
+    ResetState.OnReset += ResetSling;
   }
 
   //unregister from throwable object events
@@ -57,6 +58,7 @@ public class Sling : MonoBehaviour
   {
     ThrowObject.OnLaunched -= Launch;
     ThrowObject.OnDrag -= RotateAndShowPath;
+    ResetState.OnReset -= ResetSling;
   }
 
   #endregion
@@ -92,6 +94,7 @@ public class Sling : MonoBehaviour
     lineVisual.enabled = true;
 
     var initialVelocity = throwItem.transform.forward * throwPower;
+    throwItem.transform.localRotation = Quaternion.identity;
     pathController.VisualizePath(initialVelocity, throwItem.transform.position);
   }
   private void VibrationAnimToOriginalPosAfterLaunch() => StartCoroutine(Move());
@@ -110,6 +113,14 @@ public class Sling : MonoBehaviour
     }
   }
 
+  private void ResetSling()
+  {
+    VibrationAnimToOriginalPosAfterLaunch();
+    lineVisual.enabled = false;
+    objectContainer.PrepareTopObject();
+    throwItem = null;
+
+  }
 
 }
 

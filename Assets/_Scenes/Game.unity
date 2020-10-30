@@ -2139,6 +2139,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ecbcdbbdd63f44ce584606982d66a78f, type: 2}
+    - target: {fileID: 2974132071228570674, guid: e797a512aa195471d804f4013942a337,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 2974132071411332346, guid: e797a512aa195471d804f4013942a337,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2198,6 +2203,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sling
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956462195425533432, guid: e797a512aa195471d804f4013942a337,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956462195785625909, guid: e797a512aa195471d804f4013942a337,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956462196410364288, guid: e797a512aa195471d804f4013942a337,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956462196685974820, guid: e797a512aa195471d804f4013942a337,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 7799259918542023336, guid: e797a512aa195471d804f4013942a337,
         type: 3}

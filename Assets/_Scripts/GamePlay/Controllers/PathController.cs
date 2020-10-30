@@ -14,6 +14,7 @@ public class PathController
 
   public void VisualizePath(Vector3 initialVelocity, Vector3 startPosition)
   {
+    Clear();
     for (int i = 0; i < lineSegment; i++)
     {
       Vector3 pos = CalculatePositionInTime(initialVelocity, i / (float)lineSegment, startPosition);
@@ -34,4 +35,15 @@ public class PathController
     return distance;
 
   }
+
+
+  public void Clear()
+  {
+    for (int i = 0; i < lineSegment; i++)
+    {
+
+      lineVisual.SetPosition(i, Vector3.zero);
+    }
+  }
+
 }
