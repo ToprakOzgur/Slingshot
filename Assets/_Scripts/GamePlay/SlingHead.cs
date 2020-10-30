@@ -5,7 +5,6 @@ using UnityEngine;
 public class SlingHead : MonoBehaviour
 {
   [SerializeField] private float animDuration;
-  [SerializeField] private MeshCollider meshCollider;
 
   //register to throwable object events
   private void OnEnable() => ThrowObject.OnLaunched += MoveDown;
@@ -21,7 +20,6 @@ public class SlingHead : MonoBehaviour
 
   IEnumerator MoveDownUpAnim()
   {
-    meshCollider.enabled = false;
     var startPosition = transform.localPosition;
     var endPosition = new Vector3(startPosition.x, startPosition.y - 0.18f, startPosition.z);
 
@@ -40,6 +38,5 @@ public class SlingHead : MonoBehaviour
       transform.localPosition = Vector3.Lerp(endPosition, startPosition, t);
       yield return null;
     }
-    meshCollider.enabled = true;
   }
 }
