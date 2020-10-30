@@ -1,18 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GamePlayState : BaseState
 {
+  public static event Action<bool> OnGamePlayActivated = delegate { };
   private Game currentGame;
 
   public override void OnActivate()
   {
-    ThrowObject.isGamePlayActivated = true;
 
+    OnGamePlayActivated(true);
     currentGame = new Game();
   }
   public override void OnDeactivate()
   {
-    ThrowObject.isGamePlayActivated = false;
+    OnGamePlayActivated(false);
+
   }
   private void OnEnable()
   {

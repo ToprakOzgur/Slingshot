@@ -10,7 +10,22 @@ public class ThrowObject : MonoBehaviour
   protected float mZCoord;
   protected Vector3 touchStartPoint;
 
-  public static bool isGamePlayActivated = false;
+  private bool isGamePlayActivated = false;
+
+
+  #region Unity Events
+
+  private void OnEnable()
+  {
+    GamePlayState.OnGamePlayActivated += GamePlayActivated;
+  }
+  private void OnDisable()
+  {
+    GamePlayState.OnGamePlayActivated -= GamePlayActivated;
+  }
+  #endregion
+
+
   #region Drag functions
   protected void OnMouseDown()
   {
@@ -56,4 +71,9 @@ public class ThrowObject : MonoBehaviour
   }
 
   #endregion
+
+  private void GamePlayActivated(bool isActive)
+  {
+    isGamePlayActivated = isActive;
+  }
 }
